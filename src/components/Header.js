@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 const NavWrap = styled.ul`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   list-style: none;
 `;
@@ -22,11 +22,12 @@ const NavItem = styled.li`
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: #383838;
-  border: 1px solid #383838;
-  padding: 3px 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
 
   &:hover {
     cursor: pointer;
+    border-bottom: 1px solid #383838;
   }
 `;
 
