@@ -6,6 +6,9 @@ const Button = styled.button`
   background: none;
   color: #383838;
   padding: 5px 10px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default ({ label, onPress }) => {
