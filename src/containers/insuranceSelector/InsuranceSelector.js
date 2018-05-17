@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import TitlePanel from '../../reusable/TitlePanel';
 import {
   Card,
@@ -11,6 +12,7 @@ import {
 import FlatButton from 'material-ui/FlatButton';
 import styled from 'styled-components';
 import INSURANCE_DATA from '../../API/insurancePackages.json';
+import CircularProgress from 'material-ui/CircularProgress';
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,27 +26,6 @@ const Wrapper = styled.div`
 const CardWrapper = styled.div`
   margin: 10px;
 `;
-
-export default class InsuranceSelector extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      insurancePackage: null,
-    };
-  }
-  render() {
-    return (
-      <div>
-        <TitlePanel title="Insurance Selector" />
-        <Wrapper>
-          <InsurancePanel />
-          <InsurancePanel />
-          <InsurancePanel />
-        </Wrapper>
-      </div>
-    );
-  }
-}
 
 const InsurancePanel = ({
   name = 'test',
@@ -70,3 +51,43 @@ const InsurancePanel = ({
     </CardWrapper>
   );
 };
+
+class InsuranceSelector extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      insurancePackage: null,
+    };
+  }
+  render() {
+    const { store } = this.props;
+
+    return (
+      <div>
+        <TitlePanel title="Insurance Selector" />
+        <Wrapper>
+          {store.insurancePackage.packages ? (
+            store.insurancePackage.packages.map(pack => (
+              <InsurancePanel
+                key={pack.id}
+                name={pack.name}
+                description={`Price: ${pack.price}`}
+              />
+            ))
+          ) : (
+            <CircularProgress />
+          )}
+        </Wrapper>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  store: {
+    insurancePackage: state.insurancePackage,
+    app: state.app,
+  },
+});
+
+export default connect(mapStateToProps)(InsuranceSelector);

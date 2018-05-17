@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { resetApp, loadInsuranceData } from '../../redux/actions/app';
+import {
+  resetApp,
+  loadInsuranceData,
+  loadDoctorData,
+} from '../../redux/actions/app';
 import IconButton from 'material-ui/IconButton';
 // import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router-dom';
@@ -54,6 +58,7 @@ class Header extends Component {
     } = nextProps;
     if (!prevState.packagesLoaded && !insurancePackage.packages && app.auth) {
       actions.loadInsuranceData();
+      actions.loadDoctorData();
       return {
         loading: true,
       };
@@ -82,6 +87,7 @@ class Header extends Component {
     } = this.props;
     if (app.auth) {
       actions.loadInsuranceData();
+      actions.loadDoctorData();
       this.setState(() => ({ loading: true }));
     }
   }
@@ -111,6 +117,7 @@ const mapState = state => ({
   store: {
     app: state.app,
     insurancePackage: state.insurancePackage,
+    doctors: state.doctors,
   },
 });
 
@@ -118,6 +125,7 @@ const mapDispatch = dispatch => ({
   actions: {
     resetApp: bindActionCreators(resetApp, dispatch),
     loadInsuranceData: bindActionCreators(loadInsuranceData, dispatch),
+    loadDoctorData: bindActionCreators(loadDoctorData, dispatch),
   },
 });
 

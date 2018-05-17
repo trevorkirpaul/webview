@@ -2,6 +2,7 @@
   "data": [
     {
       "name": "Bronze",
+      "id": "123",
       "price": 150,
       "benefits": [
         {
@@ -26,6 +27,7 @@
     },
     {
       "name": "Silver",
+      "id": "124",
       "price": 300,
       "benefits": [
         {
@@ -60,6 +62,7 @@
     },
     {
       "name": "Gold",
+      "id": "125",
       "price": 600,
       "benefits": [
         {

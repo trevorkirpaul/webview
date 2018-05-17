@@ -2,10 +2,12 @@ import CASES from '../cases';
 import { URI } from '../../config';
 import axios from 'axios';
 import INSURANCE_DATA from '../../API/insurancePackages.json';
+import DOCTOR_DATA from '../../API/doctors.json';
 
 const { USER } = URI;
 
 const { ATTEMPT_LOGIN, SUCCESS_LOGIN, FAIL_LOGIN, RESET_LOGIN } = CASES.APP;
+const { DOCTOR } = CASES;
 
 export const login = () => dispatch => {
   dispatch({
@@ -77,4 +79,20 @@ export const loadInsuranceData = () => dispatch => {
     error: false,
     packages: fetchedPackages || DATA,
   });
+};
+
+export const loadDoctorData = () => dispatch => {
+  const DATA = DOCTOR_DATA.data;
+  dispatch({ type: DOCTOR.LOAD_DATA, loading: true, loaded: false });
+
+  // fetch doctor data
+
+  setTimeout(() => {
+    return dispatch({
+      type: DOCTOR.DATA_COMPLETE,
+      loading: false,
+      loaded: true,
+      doctors: DATA,
+    });
+  }, 0);
 };

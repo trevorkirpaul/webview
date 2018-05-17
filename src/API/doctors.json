@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "name": "Michael Carlisle",
+      "specilization": "Internal Medicine",
+      "preferred": true,
+      "phone": 7166888887,
+      "city": "Hopewell",
+      "state": "Virginia",
+      "country": "USA",
+      "rating": 5,
+      "cost": 0
+    },
+    {
+      "name": "Billy Billiams",
+      "specilization": "Footology",
+      "preferred": false,
+      "phone": 7166888887,
+      "city": "Hopewell",
+      "state": "Virginia",
+      "country": "USA",
+      "rating": 0,
+      "cost": 100
+    },
+    {
+      "name": "Bob Roberts",
+      "specilization": "Plastic Surgeon",
+      "preferred": true,
+      "phone": 1231231234,
+      "city": "Richmond",
+      "state": "Virginia",
+      "country": "USA",
+      "rating": 5,
+      "cost": 90
+    },
+    {
+      "name": "Jennifer Lopez",
+      "specilization": "Vocal Therapy",
+      "preferred": true,
+      "phone": 9879873456,
+      "city": "Los Angeles",
+      "state": "California",
+      "country": "USA",
+      "rating": 5,
+      "cost": 0
+    }
+  ]
+}
