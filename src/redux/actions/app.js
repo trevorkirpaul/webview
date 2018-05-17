@@ -1,6 +1,7 @@
 import CASES from '../cases';
 import { URI } from '../../config';
 import axios from 'axios';
+import INSURANCE_DATA from '../../API/insurancePackages.json';
 
 const { USER } = URI;
 
@@ -23,7 +24,7 @@ export const login = () => dispatch => {
       error: false,
       auth: true,
     });
-  }, 5000);
+  }, 0);
 };
 
 export const createUser = user => dispatch => {
@@ -59,3 +60,21 @@ export const createUser = user => dispatch => {
 };
 
 export const resetApp = () => ({ type: RESET_LOGIN });
+
+export const loadInsuranceData = () => dispatch => {
+  const DATA = INSURANCE_DATA.data;
+
+  dispatch({ type: CASES.DATA.LOAD_DATA, loading: true, loaded: false });
+
+  // fetch insurance data
+
+  const fetchedPackages = false;
+
+  dispatch({
+    type: CASES.DATA.DATA_COMPLETE,
+    loading: false,
+    loaded: true,
+    error: false,
+    packages: fetchedPackages || DATA,
+  });
+};

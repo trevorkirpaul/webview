@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { resetApp } from '../../redux/actions/app';
+import { resetApp, loadInsuranceData } from '../../redux/actions/app';
 import IconButton from 'material-ui/IconButton';
 // import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router-dom';
@@ -33,7 +33,7 @@ const LinkButton = ({ location, text }) => (
 
 const AuthTrueButtons = (
   <ButtonWrapper>
-    <LinkButton location="/" text="View Package" />
+    <LinkButton location="/insurance-package" text="View Package" />
     <LinkButton location="/" text="Find Doctor" />
     <LinkButton location="/sign-out" text="Sign Out" />
   </ButtonWrapper>
@@ -47,6 +47,44 @@ const AuthFalseButtons = (
 );
 
 class Header extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const {
+      store: { app, insurancePackage },
+      actions,
+    } = nextProps;
+    if (!prevState.packagesLoaded && !insurancePackage.packages && app.auth) {
+      actions.loadInsuranceData();
+      return {
+        loading: true,
+      };
+    }
+    if (insurancePackage.packages && !prevState.packagesLoaded) {
+      return {
+        loading: false,
+        packagesLoaded: true,
+      };
+    }
+
+    return null;
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      packages: null,
+      packagesLoaded: false,
+      loading: false,
+    };
+  }
+  componentDidMount() {
+    const {
+      store: { app },
+      actions,
+    } = this.props;
+    if (app.auth) {
+      actions.loadInsuranceData();
+      this.setState(() => ({ loading: true }));
+    }
+  }
   render() {
     const {
       store: { app },
@@ -72,12 +110,14 @@ class Header extends Component {
 const mapState = state => ({
   store: {
     app: state.app,
+    insurancePackage: state.insurancePackage,
   },
 });
 
 const mapDispatch = dispatch => ({
   actions: {
     resetApp: bindActionCreators(resetApp, dispatch),
+    loadInsuranceData: bindActionCreators(loadInsuranceData, dispatch),
   },
 });
 

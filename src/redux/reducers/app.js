@@ -8,6 +8,7 @@ const initState = {
 };
 
 const { ATTEMPT_LOGIN, SUCCESS_LOGIN, FAIL_LOGIN, RESET_LOGIN } = CASES.APP;
+const { DATA } = CASES;
 
 export default (state = initState, action) => {
   switch (action.type) {
@@ -37,6 +38,18 @@ export default (state = initState, action) => {
       };
     case RESET_LOGIN:
       return initState;
+    case DATA.LOAD_DATA:
+      return {
+        ...state,
+        loading: action.loading,
+        loaded: action.loaded,
+      };
+    case DATA.DATA_COMPLETE:
+      return {
+        ...state,
+        loading: action.loading,
+        loaded: action.loaded,
+      };
     default:
       return state;
   }

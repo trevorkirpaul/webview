@@ -1,0 +1,100 @@
+{
+  "data": [
+    {
+      "name": "Bronze",
+      "price": 150,
+      "benefits": [
+        {
+          "name": "Mailer",
+          "description": "Mails your prescriptions"
+        },
+        {
+          "name": "Acidental Injury",
+          "description":
+            "This benefit pays fixed amounts in the event of a covered accident resulting in an injury that required medical care."
+        },
+        {
+          "name": "Mailer",
+          "description": "Mails your prescriptions"
+        },
+        {
+          "name": "Pharmaceutical Discounts",
+          "description":
+            "This service provides discounts on the retail price for thousands of medications at participating pharmacies nationwide."
+        }
+      ]
+    },
+    {
+      "name": "Silver",
+      "price": 300,
+      "benefits": [
+        {
+          "name": "Mailer",
+          "description": "Mails your prescriptions"
+        },
+        {
+          "name": "Acidental Injury",
+          "description":
+            "This benefit pays fixed amounts in the event of a covered accident resulting in an injury that required medical care."
+        },
+        {
+          "name": "Mailer",
+          "description": "Mails your prescriptions"
+        },
+        {
+          "name": "Pharmaceutical Discounts",
+          "description":
+            "This service provides discounts on the retail price for thousands of medications at participating pharmacies nationwide."
+        },
+        {
+          "name": "Hospitalization Insurance",
+          "description":
+            "This benefit pays fixed amounts for covered medical events provided at a hospital."
+        },
+        {
+          "name": "Telemedicine",
+          "description":
+            "This service provides 24 hour a day access to health care providers by phone or the internet."
+        }
+      ]
+    },
+    {
+      "name": "Gold",
+      "price": 600,
+      "benefits": [
+        {
+          "name": "Mailer",
+          "description": "Mails your prescriptions"
+        },
+        {
+          "name": "Acidental Injury",
+          "description":
+            "This benefit pays fixed amounts in the event of a covered accident resulting in an injury that required medical care."
+        },
+        {
+          "name": "Mailer",
+          "description": "Mails your prescriptions"
+        },
+        {
+          "name": "Pharmaceutical Discounts",
+          "description":
+            "This service provides discounts on the retail price for thousands of medications at participating pharmacies nationwide."
+        },
+        {
+          "name": "Hospitalization Insurance",
+          "description":
+            "This benefit pays fixed amounts for covered medical events provided at a hospital."
+        },
+        {
+          "name": "Telemedicine",
+          "description":
+            "This service provides 24 hour a day access to health care providers by phone or the internet."
+        },
+        {
+          "name": "Doctor BFF",
+          "description": "You now have a Doctor for a best friend!"
+        }
+      ]
+    }
+  ]
+}
