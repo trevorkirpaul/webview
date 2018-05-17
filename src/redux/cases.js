@@ -1,0 +1,8 @@
+export default {
+  APP: {
+    ATTEMPT_LOGIN: '@@APP/LOGIN/ATTEMPT',
+    SUCCESS_LOGIN: '@@APP/LOGIN/SUCCESS',
+    FAIL_LOGIN: '@@APP/LOGIN/FAIL',
+    RESET_LOGIN: '@@APP/LOGIN/RESET',
+  },
+};
