@@ -17,7 +17,7 @@ export default class Home extends Component {
       <div>
         <TitlePanel
           title="Stay Healthy"
-          subtitle="Overpriced Health Care"
+          subtitle="Amazing Health Care"
           body="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi exercitationem, iure porro unde obcaecati suscipit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, aut."
         />
         <RaisedButton label="Clear Saved Name" onClick={this.printSavedName} />

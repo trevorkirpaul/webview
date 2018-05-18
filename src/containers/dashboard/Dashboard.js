@@ -33,7 +33,7 @@ class Dashboard extends Component {
         <TitlePanel title="Dashboard" subtitle={`Welcome, ${firstName}`} />
         <ListWrapper>
           <List>
-            <ListItem>
+            {/* <ListItem>
               <ListText>First Name: {firstName}</ListText>
             </ListItem>
             <Divider />
@@ -41,16 +41,16 @@ class Dashboard extends Component {
             <ListItem>
               <ListText>Last Name: {lastName}</ListText>
             </ListItem>
-            <Divider />
+            <Divider /> */}
 
             <ListItem>
               <ListText>Email: {email}</ListText>
             </ListItem>
             <Divider />
 
-            <ListItem>
+            {/* <ListItem>
               <ListText>Username: {username}</ListText>
-            </ListItem>
+            </ListItem> */}
           </List>
         </ListWrapper>
       </div>
