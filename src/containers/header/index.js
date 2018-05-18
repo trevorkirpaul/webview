@@ -7,12 +7,16 @@ import {
   loadDoctorData,
 } from '../../redux/actions/app';
 import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 // import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import AppBar from 'material-ui/AppBar';
 import COLORS from '../../utils/constants';
 import Icon from '../../reusable/Icon';
+import { login } from '../../redux/actions/app';
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -37,9 +41,28 @@ const LinkButton = ({ location, text }) => (
 
 const AuthTrueButtons = (
   <ButtonWrapper>
-    <LinkButton location="/insurance-package" text="View Package" />
-    <LinkButton location="/" text="Find Doctor" />
-    <LinkButton location="/sign-out" text="Sign Out" />
+    <IconMenu
+      iconButtonElement={
+        <IconButton>
+          <MoreVertIcon />
+        </IconButton>
+      }
+      targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+      anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+    >
+      <MenuItem>
+        <LinkButton location="/dashboard" text="Dashboard" />
+      </MenuItem>
+      <MenuItem>
+        <LinkButton location="/insurance-package" text="View Package" />
+      </MenuItem>
+      <MenuItem>
+        <LinkButton location="/find-doctors" text="Find Doctor" />
+      </MenuItem>
+      <MenuItem>
+        <LinkButton location="/sign-out" text="Sign Out" />
+      </MenuItem>
+    </IconMenu>
   </ButtonWrapper>
 );
 
@@ -85,10 +108,14 @@ class Header extends Component {
       store: { app },
       actions,
     } = this.props;
+    const name = localStorage.getItem('name');
     if (app.auth) {
       actions.loadInsuranceData();
       actions.loadDoctorData();
       this.setState(() => ({ loading: true }));
+    }
+    if (name) {
+      actions.login({ email: name });
     }
   }
   render() {
@@ -126,6 +153,7 @@ const mapDispatch = dispatch => ({
     resetApp: bindActionCreators(resetApp, dispatch),
     loadInsuranceData: bindActionCreators(loadInsuranceData, dispatch),
     loadDoctorData: bindActionCreators(loadDoctorData, dispatch),
+    login: bindActionCreators(login, dispatch),
   },
 });
 

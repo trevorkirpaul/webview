@@ -19,6 +19,7 @@ export default (state = initState, action) => {
         loaded: action.loaded,
         error: action.error,
         auth: action.auth,
+        email: action.email,
       };
     case SUCCESS_LOGIN:
       return {
@@ -27,6 +28,10 @@ export default (state = initState, action) => {
         loaded: action.loaded,
         error: action.error,
         auth: action.auth,
+        username: action.username,
+        email: action.email || state.email,
+        firstName: action.firstName,
+        lastName: action.lastName,
       };
     case FAIL_LOGIN:
       return {

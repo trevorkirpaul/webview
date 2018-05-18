@@ -5,13 +5,11 @@ import {
   Card,
   CardActions,
   CardHeader,
-  CardMedia,
   CardTitle,
   CardText,
 } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import styled from 'styled-components';
-import INSURANCE_DATA from '../../API/insurancePackages.json';
 import CircularProgress from 'material-ui/CircularProgress';
 
 const Wrapper = styled.div`

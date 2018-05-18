@@ -2,7 +2,8 @@
   "data": [
     {
       "name": "Michael Carlisle",
-      "specilization": "Internal Medicine",
+      "id": "1233",
+      "specialization": "Internal Medicine",
       "preferred": true,
       "phone": 7166888887,
       "city": "Hopewell",
@@ -13,7 +14,8 @@
     },
     {
       "name": "Billy Billiams",
-      "specilization": "Footology",
+      "id": "1234",
+      "specialization": "Footology",
       "preferred": false,
       "phone": 7166888887,
       "city": "Hopewell",
@@ -24,7 +26,8 @@
     },
     {
       "name": "Bob Roberts",
-      "specilization": "Plastic Surgeon",
+      "id": "1235",
+      "specilaization": "Plastic Surgeon",
       "preferred": true,
       "phone": 1231231234,
       "city": "Richmond",
@@ -35,7 +38,8 @@
     },
     {
       "name": "Jennifer Lopez",
-      "specilization": "Vocal Therapy",
+      "id": "1236",
+      "specialization": "Vocal Therapy",
       "preferred": true,
       "phone": 9879873456,
       "city": "Los Angeles",

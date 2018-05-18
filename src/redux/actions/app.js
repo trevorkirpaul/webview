@@ -9,13 +9,14 @@ const { USER } = URI;
 const { ATTEMPT_LOGIN, SUCCESS_LOGIN, FAIL_LOGIN, RESET_LOGIN } = CASES.APP;
 const { DOCTOR } = CASES;
 
-export const login = () => dispatch => {
+export const login = ({ email }) => dispatch => {
   dispatch({
     type: ATTEMPT_LOGIN,
     loading: true,
     loaded: false,
     error: false,
     auth: false,
+    email: email || null,
   });
   /// fetch sign in
   setTimeout(() => {
@@ -25,6 +26,10 @@ export const login = () => dispatch => {
       loaded: true,
       error: false,
       auth: true,
+      // for testing
+      username: 'tkirpaul',
+      firstName: 'Trevor',
+      lastName: 'Kirpaul',
     });
   }, 0);
 };

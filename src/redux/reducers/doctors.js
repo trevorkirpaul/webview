@@ -24,6 +24,16 @@ export default (state = initState, action) => {
         loading: action.loading,
         loaded: action.loaded,
       };
+    case DOCTOR.SELECT:
+      return {
+        ...state,
+        doctor: action.id,
+      };
+    case DOCTOR.CLEAR:
+      return {
+        ...state,
+        doctor: null,
+      };
     default:
       return state;
   }

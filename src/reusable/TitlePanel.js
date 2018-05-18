@@ -24,12 +24,13 @@ const HalfScreen = styled.div`
   max-width: 400px;
 `;
 
-export default ({ title, subtitle, body }) => {
+export default ({ title, subtitle, body, content }) => {
   return (
     <Wrapper>
       <Title>{title}</Title>
       {subtitle && <SubTitle>{subtitle}</SubTitle>}
       <HalfScreen>{body && <Body>{body}</Body>}</HalfScreen>
+      {content && content}
     </Wrapper>
   );
 };

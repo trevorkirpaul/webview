@@ -50,8 +50,8 @@ class SignIn extends Component {
       return null;
     }
     this.setState(() => ({ loading: true, loadingMessage: 'Signing In...' }));
-    this.props.actions.login();
-    return console.log({ USER: this.state });
+    this.props.actions.login({ email: this.state.email });
+    localStorage.setItem('name', this.state.email);
   };
   handleCloseModal = () => {
     this.setState(() => ({

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TitlePanel from '../../reusable/TitlePanel';
-import INSURANCE_DATA from '../../API/insurancePackages.json';
+// import INSURANCE_DATA from '../../API/insurancePackages.json';
 import FindPackage from './FindPackage';
 
 export default class InsurancePackages extends Component {
