@@ -28,9 +28,7 @@
 
 * challenges:
 
-  *
-
-* pros:
+- pros:
   * Will save a ton of development time and minimize potential errors due to having much less code to work with.
 
 ---
@@ -42,3 +40,5 @@ The RN app can fetch/save data on its own then send it to the WebView
 React-Native-Web: https://hackernoon.com/react-native-web-and-true-component-sharing-caa535b9dd7f
 
 > "React Native for Web" brings the platform-agnostic Components and APIs of React Native to the Web.
+
+https://docs.google.com/presentation/d/12RjcJKf0ryDhBnP2HPbuuLA-ciN2TNnI2LjxDtJahjs/edit#slide=id.g35f391192_00

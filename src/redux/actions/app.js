@@ -1,6 +1,7 @@
 import CASES from '../cases';
 import { URI } from '../../config';
-import axios from 'axios';
+import { request } from 'graphql-request';
+// import axios from 'axios';
 import INSURANCE_DATA from '../../API/insurancePackages.json';
 import DOCTOR_DATA from '../../API/doctors.json';
 
@@ -43,27 +44,72 @@ export const createUser = user => dispatch => {
     auth: false,
   });
 
-  axios
-    .post(USER.CREATE, user)
-    .then(user => {
-      return dispatch({
-        type: SUCCESS_LOGIN,
-        loading: false,
-        loaded: true,
-        error: false,
-        auth: true,
-        user,
-      });
-    })
-    .catch(() => {
-      return dispatch({
-        type: FAIL_LOGIN,
-        loading: false,
-        loaded: true,
-        error: true,
-        auth: false,
-      });
-    });
+  const mutation = `
+    mutation CreateUser($email: String) {
+      signup(email: $email) {
+        id
+        email
+      }
+    }
+  `;
+  request('http://localhost:4000', mutation, { ...user })
+    .then(data => console.log('SUCCESS', { data }))
+    .catch(err => console.log('ERROR', { err }));
+  // const createUserQL = `
+  // mutation {
+  //   signup(
+  //     email: ${user.email}
+  //     firstName: ${user.firstName}
+  //     lastName: ${user.lastName}
+  //     city: ${user.city}
+  //     state: ${user.state}
+  //     country: ${user.country}
+  //     zip: ${user.zip}
+  //     phone: ${user.phone}
+  //     dob: ${user.dob}
+  //     password: ${user.password}
+  //   ) {
+  //     id
+  //     email
+  //     firstName
+  //   }
+  // }`;
+
+  // request('http://localhost:4000', createUserQL)
+  //   .then(data => console.log('SUCCESS', { data }))
+  // .then(user => {
+  //   return dispatch({
+  //     type: SUCCESS_LOGIN,
+  //     loading: false,
+  //     loaded: true,
+  //     error: false,
+  //     auth: true,
+  //     user,
+  //   });
+  // })
+  // .catch(err => console.log(err));
+
+  // axios
+  //   .post(USER.CREATE, user)
+  //   .then(user => {
+  //     return dispatch({
+  //       type: SUCCESS_LOGIN,
+  //       loading: false,
+  //       loaded: true,
+  //       error: false,
+  //       auth: true,
+  //       user,
+  //     });
+  //   })
+  //   .catch(() => {
+  //     return dispatch({
+  //       type: FAIL_LOGIN,
+  //       loading: false,
+  //       loaded: true,
+  //       error: true,
+  //       auth: false,
+  //     });
+  //   });
 };
 
 export const resetApp = () => ({ type: RESET_LOGIN });

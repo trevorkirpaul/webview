@@ -21,10 +21,10 @@ class Dashboard extends Component {
     const {
       store: {
         app: {
-          username = 'test',
+          // username = 'test',
           email = 'test@test.com',
           firstName = 'test',
-          lastName = 'test',
+          // lastName = 'test',
         },
       },
     } = this.props;
