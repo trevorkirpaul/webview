@@ -43,39 +43,20 @@ export const createUser = user => dispatch => {
     error: false,
     auth: false,
   });
-  const {
-    email,
-    firstName,
-    lastName,
-    city,
-    state,
-    country,
-    zip,
-    phone,
-    dob,
-    password,
-  } = user;
-  //   const mutation = `
-  //   mutation CreateUser(
-  //     $email: String
-  //   ) {
-  //     signup(email: $email) {
+  const variables = { ...user };
+
+  /*
+    this is the GraphQL mutation where we plug in
+    the fields from `user`. In this code, I'm setting variables
+    but we could just plug 
+  */
+  // const mutation = `
+  //   mutation {
+  //     signup(email: ${user.email}) {
   //       id
   //     }
   //   }
   // `;
-  const variables = {
-    email,
-    firstName,
-    lastName,
-    city,
-    state,
-    country,
-    zip,
-    phone,
-    dob,
-    password,
-  };
   const mutation = `
     mutation CreateUser(
       $email: String
@@ -102,68 +83,31 @@ export const createUser = user => dispatch => {
         password: $password
       ) {
         id
-        email
       }
     }
   `;
+  // this is from the package "graphql-request"
+  // axios like fetch library for GraphQL based fetches
   request('http://localhost:4000', mutation, variables)
-    .then(data => console.log('SUCCESS', { data }))
-    .catch(err => console.log('ERROR', { err }));
-  // const createUserQL = `
-  // mutation {
-  //   signup(
-  //     email: ${user.email}
-  //     firstName: ${user.firstName}
-  //     lastName: ${user.lastName}
-  //     city: ${user.city}
-  //     state: ${user.state}
-  //     country: ${user.country}
-  //     zip: ${user.zip}
-  //     phone: ${user.phone}
-  //     dob: ${user.dob}
-  //     password: ${user.password}
-  //   ) {
-  //     id
-  //     email
-  //     firstName
-  //   }
-  // }`;
-
-  // request('http://localhost:4000', createUserQL)
-  //   .then(data => console.log('SUCCESS', { data }))
-  // .then(user => {
-  //   return dispatch({
-  //     type: SUCCESS_LOGIN,
-  //     loading: false,
-  //     loaded: true,
-  //     error: false,
-  //     auth: true,
-  //     user,
-  //   });
-  // })
-  // .catch(err => console.log(err));
-
-  // axios
-  //   .post(USER.CREATE, user)
-  //   .then(user => {
-  //     return dispatch({
-  //       type: SUCCESS_LOGIN,
-  //       loading: false,
-  //       loaded: true,
-  //       error: false,
-  //       auth: true,
-  //       user,
-  //     });
-  //   })
-  //   .catch(() => {
-  //     return dispatch({
-  //       type: FAIL_LOGIN,
-  //       loading: false,
-  //       loaded: true,
-  //       error: true,
-  //       auth: false,
-  //     });
-  //   });
+    .then(({ signup: { id } }) => {
+      return dispatch({
+        type: SUCCESS_LOGIN,
+        loading: false,
+        loaded: true,
+        error: false,
+        auth: true,
+        userId: id,
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: FAIL_LOGIN,
+        loading: false,
+        loaded: true,
+        error: true,
+        auth: false,
+      })
+    );
 };
 
 export const resetApp = () => ({ type: RESET_LOGIN });
