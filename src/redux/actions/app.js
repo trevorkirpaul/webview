@@ -43,16 +43,70 @@ export const createUser = user => dispatch => {
     error: false,
     auth: false,
   });
-
+  const {
+    email,
+    firstName,
+    lastName,
+    city,
+    state,
+    country,
+    zip,
+    phone,
+    dob,
+    password,
+  } = user;
+  //   const mutation = `
+  //   mutation CreateUser(
+  //     $email: String
+  //   ) {
+  //     signup(email: $email) {
+  //       id
+  //     }
+  //   }
+  // `;
+  const variables = {
+    email,
+    firstName,
+    lastName,
+    city,
+    state,
+    country,
+    zip,
+    phone,
+    dob,
+    password,
+  };
   const mutation = `
-    mutation CreateUser($email: String) {
-      signup(email: $email) {
+    mutation CreateUser(
+      $email: String
+      $firstName: String
+      $lastName: String,
+      $city: String,
+      $state: String,
+      $country: String,
+      $zip: Int,
+      $phone: Int,
+      $dob: Int,
+      $password: String,
+    ) {
+      signup(
+        email: $email
+        firstName: $firstName
+        lastName: $lastName
+        city: $city
+        state: $state
+        country: $country
+        zip: $zip
+        phone: $phone
+        dob: $dob
+        password: $password
+      ) {
         id
         email
       }
     }
   `;
-  request('http://localhost:4000', mutation, { ...user })
+  request('http://localhost:4000', mutation, variables)
     .then(data => console.log('SUCCESS', { data }))
     .catch(err => console.log('ERROR', { err }));
   // const createUserQL = `

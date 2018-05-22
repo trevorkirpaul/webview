@@ -18,21 +18,23 @@ const fields = [
   { name: 'zip', type: 'text', required: true, id: uuid() },
   { name: 'phone', type: 'text', required: true, id: uuid() },
   { name: 'dob', type: 'text', required: true, id: uuid() },
+  { name: 'password', type: 'password', required: true, id: uuid() },
 ];
 
 class CreateUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      firstName: '',
-      lastName: '',
-      city: '',
-      state: '',
-      country: '',
-      zip: '',
-      phone: '',
-      dob: '',
+      email: 'test',
+      firstName: 'test',
+      lastName: 'test',
+      city: 'test',
+      state: 'test',
+      country: 'test',
+      zip: 1234,
+      phone: 1234,
+      dob: 1234,
+      password: 'test',
     };
   }
   handleOnChange = e => {
