@@ -27,6 +27,11 @@ class SignIn extends Component {
         loadingComplete: true,
       };
     }
+    if (app.fromWrapper) {
+      return {
+        title: 'From Wrapper',
+      };
+    }
     return null;
   }
   constructor(props) {
@@ -37,6 +42,7 @@ class SignIn extends Component {
       loading: false,
       loadingMessage: null,
       loadingComplete: false,
+      title: 'Sign In',
     };
   }
   handleOnChange = e => {
@@ -46,6 +52,7 @@ class SignIn extends Component {
     this.setState(() => ({ [name]: value }));
   };
   handleSubmit = () => {
+    return null;
     if (!this.state.email) {
       return null;
     }
@@ -70,10 +77,13 @@ class SignIn extends Component {
         onClick={this.handleCloseModal}
       />,
     ];
+    const {
+      store: { app },
+    } = this.props;
     return (
-      <div>
+      <div style={{ paddingTop: app.fromWrapper ? '10px' : '70px' }}>
         <TitlePanel
-          title="Sign In"
+          title={this.state.title}
           subtitle="Please complete the following form"
         />
         <Form

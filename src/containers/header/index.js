@@ -17,6 +17,35 @@ import AppBar from 'material-ui/AppBar';
 import COLORS from '../../utils/constants';
 import Icon from '../../reusable/Icon';
 import { login } from '../../redux/actions/app';
+const FixedWrap = styled.div`
+  /* position: fixed;
+  display: flex;
+  justify-content: center; */
+`;
+const MobileHeader = styled.div`
+  padding-top: 25px;
+  background-color: palevioletred;
+  color: #383838;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+`;
+const MobileButtonWrap = styled.div`
+  width: 75%;
+  padding-bottom: 10px;
+  padding-right: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+`;
+const MobileTitle = styled.span`
+  font-size: 2em;
+  font-family: 'Roboto', sans-serif;
+  color: #f8f8f8;
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -101,6 +130,7 @@ class Header extends Component {
       packages: null,
       packagesLoaded: false,
       loading: false,
+      title: 'Main',
     };
   }
   componentDidMount() {
@@ -118,15 +148,31 @@ class Header extends Component {
       actions.login({ email: name });
     }
   }
+
   render() {
     const {
       store: { app },
     } = this.props;
+    if (app.fromWrapper) {
+      return (
+        <MobileHeader>
+          <MobileButtonWrap>
+            <Link to="/">
+              <Icon icon="waves" color={COLORS.white} />
+            </Link>
+            <MobileTitle>Insurance</MobileTitle>
+            <Link to="/sign-in">
+              <Icon icon="face" color={COLORS.white} />
+            </Link>
+          </MobileButtonWrap>
+        </MobileHeader>
+      );
+    }
     return (
       <AppBar
         style={{ backgroundColor: COLORS.lightPurple }}
         titleStyle={{ color: COLORS.black }}
-        title="Insurance Plans"
+        title={this.state.title}
         iconElementLeft={
           <Link to="/">
             <IconButton>

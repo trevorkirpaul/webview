@@ -1,14 +1,25 @@
 import CASES from '../cases';
-import { URI } from '../../config';
+// import { URI } from '../../config';
 import { request } from 'graphql-request';
-// import axios from 'axios';
 import INSURANCE_DATA from '../../API/insurancePackages.json';
 import DOCTOR_DATA from '../../API/doctors.json';
 
-const { USER } = URI;
+// const { USER } = URI;
 
-const { ATTEMPT_LOGIN, SUCCESS_LOGIN, FAIL_LOGIN, RESET_LOGIN } = CASES.APP;
+const {
+  ACCOUNT,
+  WRAPPER,
+  ATTEMPT_LOGIN,
+  SUCCESS_LOGIN,
+  // FAIL_LOGIN,
+  RESET_LOGIN,
+} = CASES.APP;
 const { DOCTOR } = CASES;
+
+export const initWrapperStyle = () => ({
+  type: WRAPPER.INIT,
+  fromWrapper: true,
+});
 
 export const login = ({ email }) => dispatch => {
   dispatch({
@@ -37,11 +48,12 @@ export const login = ({ email }) => dispatch => {
 
 export const createUser = user => dispatch => {
   dispatch({
-    type: ATTEMPT_LOGIN,
+    type: ACCOUNT.CREATE_BEGIN,
     loading: true,
     loaded: false,
     error: false,
     auth: false,
+    userId: null,
   });
   const variables = { ...user };
 
@@ -91,7 +103,7 @@ export const createUser = user => dispatch => {
   request('http://localhost:4000', mutation, variables)
     .then(({ signup: { id } }) => {
       return dispatch({
-        type: SUCCESS_LOGIN,
+        type: ACCOUNT.CREATE_SUCCESS,
         loading: false,
         loaded: true,
         error: false,
@@ -101,7 +113,7 @@ export const createUser = user => dispatch => {
     })
     .catch(err =>
       dispatch({
-        type: FAIL_LOGIN,
+        type: ACCOUNT.CREATE_FAIL,
         loading: false,
         loaded: true,
         error: true,

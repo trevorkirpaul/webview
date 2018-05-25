@@ -5,9 +5,18 @@ const initState = {
   loaded: true,
   error: false,
   auth: false,
+  userId: null,
+  fromWrapper: false,
 };
 
-const { ATTEMPT_LOGIN, SUCCESS_LOGIN, FAIL_LOGIN, RESET_LOGIN } = CASES.APP;
+const {
+  ATTEMPT_LOGIN,
+  SUCCESS_LOGIN,
+  FAIL_LOGIN,
+  RESET_LOGIN,
+  ACCOUNT,
+  WRAPPER,
+} = CASES.APP;
 const { DATA } = CASES;
 
 export default (state = initState, action) => {
@@ -19,7 +28,6 @@ export default (state = initState, action) => {
         loaded: action.loaded,
         error: action.error,
         auth: action.auth,
-        email: action.email,
       };
     case SUCCESS_LOGIN:
       return {
@@ -29,6 +37,32 @@ export default (state = initState, action) => {
         error: action.error,
         auth: action.auth,
         userId: action.userId,
+      };
+    case ACCOUNT.CREATE_BEGIN:
+      return {
+        ...state,
+        loading: action.loading,
+        loaded: action.loaded,
+        error: action.error,
+        auth: action.auth,
+        userId: action.userId,
+      };
+    case ACCOUNT.CREATE_SUCCESS:
+      return {
+        ...state,
+        loading: action.loading,
+        loaded: action.loaded,
+        error: action.error,
+        auth: action.auth,
+        userId: action.userId,
+      };
+    case ACCOUNT.CREATE_FAIL:
+      return {
+        ...state,
+        loading: action.loading,
+        loaded: action.loaded,
+        error: action.error,
+        auth: action.auth,
       };
     case FAIL_LOGIN:
       return {
@@ -51,6 +85,11 @@ export default (state = initState, action) => {
         ...state,
         loading: action.loading,
         loaded: action.loaded,
+      };
+    case WRAPPER.INIT:
+      return {
+        ...state,
+        fromWrapper: action.fromWrapper,
       };
     default:
       return state;
