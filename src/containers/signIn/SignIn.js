@@ -52,12 +52,14 @@ class SignIn extends Component {
     this.setState(() => ({ [name]: value }));
   };
   handleSubmit = () => {
-    return null;
-    if (!this.state.email) {
-      return null;
+    if (!this.state.email || !this.state.password) {
+      return alert('Please complete the form...');
     }
     this.setState(() => ({ loading: true, loadingMessage: 'Signing In...' }));
-    this.props.actions.login({ email: this.state.email });
+    this.props.actions.login({
+      email: this.state.email,
+      password: this.state.password,
+    });
     localStorage.setItem('name', this.state.email);
   };
   handleCloseModal = () => {
@@ -81,7 +83,7 @@ class SignIn extends Component {
       store: { app },
     } = this.props;
     return (
-      <div style={{ paddingTop: app.fromWrapper ? '10px' : '70px' }}>
+      <div style={{ paddingTop: app.fromWrapper ? '70px' : '0px' }}>
         <TitlePanel
           title={this.state.title}
           subtitle="Please complete the following form"

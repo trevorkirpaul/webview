@@ -13,15 +13,19 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 // import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import AppBar from 'material-ui/AppBar';
 import COLORS from '../../utils/constants';
 import Icon from '../../reusable/Icon';
 import { login } from '../../redux/actions/app';
-const FixedWrap = styled.div`
-  /* position: fixed;
+
+const NavWrapper = styled.div`
   display: flex;
-  justify-content: center; */
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  font-family: 'Roboto', sans-serif;
+  background-color: ${COLORS.lightBlue};
 `;
+
 const MobileHeader = styled.div`
   padding-top: 25px;
   background-color: palevioletred;
@@ -47,20 +51,29 @@ const MobileTitle = styled.span`
   color: #f8f8f8;
 `;
 
+const TitleLogo = styled.span`
+  text-decoration: none;
+  color: ${COLORS.black};
+  font-size: 2em;
+  font-weight: 900;
+`;
+
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${COLORS.black};
+  border-bottom: 1px solid ${COLORS.lightBlue};
   margin: 5px 10px;
   &:hover {
-    color: ${COLORS.purple};
+    border-color: ${COLORS.black};
   }
+`;
+const BlankLink = styled(Link)`
+  text-decoration: none;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  padding: 10px;
 `;
 const LinkButton = ({ location, text }) => (
   <StyledLink to={location}>
@@ -68,7 +81,7 @@ const LinkButton = ({ location, text }) => (
   </StyledLink>
 );
 
-const AuthTrueButtons = (
+const AuthTrueButtons = () => (
   <ButtonWrapper>
     <IconMenu
       iconButtonElement={
@@ -95,7 +108,7 @@ const AuthTrueButtons = (
   </ButtonWrapper>
 );
 
-const AuthFalseButtons = (
+const AuthFalseButtons = () => (
   <ButtonWrapper>
     <LinkButton location="/create-user" text="Create User" />
     <LinkButton location="/sign-in" text="Sign In" />
@@ -169,19 +182,14 @@ class Header extends Component {
       );
     }
     return (
-      <AppBar
-        style={{ backgroundColor: COLORS.lightPurple }}
-        titleStyle={{ color: COLORS.black }}
-        title={this.state.title}
-        iconElementLeft={
-          <Link to="/">
-            <IconButton>
-              <Icon icon="public" color={COLORS.black} />
-            </IconButton>
-          </Link>
-        }
-        iconElementRight={app.auth ? AuthTrueButtons : AuthFalseButtons}
-      />
+      <NavWrapper>
+        <div>
+          <BlankLink to="/">
+            <TitleLogo>PoC</TitleLogo>
+          </BlankLink>
+        </div>
+        {app.auth ? <AuthTrueButtons /> : <AuthFalseButtons />}
+      </NavWrapper>
     );
   }
 }
