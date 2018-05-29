@@ -43,12 +43,17 @@ const FormLabelWrap = styled.div`
 //   return errors;
 // };
 
-const Input = ({ name, value, hintText, onChange, handleOnChange }) => (
+const Input = ({ name, value, hintText, onChange, handleOnChange, type }) => (
   <InputWrapper>
     <FormLabelWrap>
       <FormLabel>{name}</FormLabel>
     </FormLabelWrap>
-    <TextField name={name} value={value} onChange={handleOnChange} />
+    <TextField
+      type={type}
+      name={name}
+      value={value}
+      onChange={handleOnChange}
+    />
   </InputWrapper>
 );
 
@@ -58,10 +63,11 @@ export default ({ onSubmit, email, handleOnChange, fields, stateValues }) => {
   return (
     <Wrapper>
       {fields
-        .filter(f => f.type === 'text')
+        .filter(f => f.type === 'email' || f.type === 'password')
         .map(field => (
           <Input
             key={field.id}
+            type={field.type}
             name={field.name}
             value={stateValues.name}
             hintText={field.name}

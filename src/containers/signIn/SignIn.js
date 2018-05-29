@@ -12,8 +12,8 @@ import FlatButton from 'material-ui/FlatButton';
 import CircularProgress from 'material-ui/CircularProgress';
 
 const fields = [
-  { name: 'email', type: 'text', required: true, id: uuid() },
-  { name: 'password', type: 'text', required: true, id: uuid() },
+  { name: 'email', type: 'email', required: true, id: uuid() },
+  { name: 'password', type: 'password', required: true, id: uuid() },
 ];
 
 class SignIn extends Component {
