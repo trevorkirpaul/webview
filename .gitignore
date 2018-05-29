@@ -10,7 +10,7 @@
 /build
 
 src/secret.js
-
+aws/
 # misc
 .DS_Store
 .env.local
