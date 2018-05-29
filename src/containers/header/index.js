@@ -24,6 +24,12 @@ const NavWrapper = styled.div`
   padding: 1em;
   font-family: 'Roboto', sans-serif;
   background-color: ${COLORS.lightBlue};
+  padding-top: ${props => (props.fromWrapper ? '2em' : '1em')};
+  position: fixed;
+  width: 90%;
+  margin: 10px;
+  left: 0;
+  top: 0;
 `;
 
 const MobileHeader = styled.div`
@@ -157,32 +163,14 @@ class Header extends Component {
       actions.loadDoctorData();
       this.setState(() => ({ loading: true }));
     }
-    if (name) {
-      actions.login({ email: name });
-    }
   }
 
   render() {
     const {
       store: { app },
     } = this.props;
-    if (app.fromWrapper) {
-      return (
-        <MobileHeader>
-          <MobileButtonWrap>
-            <Link to="/">
-              <Icon icon="waves" color={COLORS.white} />
-            </Link>
-            <MobileTitle>Insurance</MobileTitle>
-            <Link to="/sign-in">
-              <Icon icon="face" color={COLORS.white} />
-            </Link>
-          </MobileButtonWrap>
-        </MobileHeader>
-      );
-    }
     return (
-      <NavWrapper>
+      <NavWrapper fromWrapper={app.fromWrapper}>
         <div>
           <BlankLink to="/">
             <TitleLogo>PoC</TitleLogo>

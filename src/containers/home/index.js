@@ -19,7 +19,7 @@ class Home extends Component {
   render() {
     const { app } = this.props;
     return (
-      <div style={{ paddingTop: !app.fromWrapper ? '0' : '70px' }}>
+      <div style={{ marginTop: app.fromWrapper ? '70px' : '0px' }}>
         <TitlePanel
           title={this.state.title}
           subtitle="Amazing Health Care"

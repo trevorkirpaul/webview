@@ -50,8 +50,9 @@ class CreateUser extends Component {
     this.props.actions.createUser(this.state);
   };
   render() {
+    const { app } = this.props.store;
     return (
-      <div>
+      <div style={{ marginTop: app.fromWrapper ? '70px' : '0px' }}>
         <TitlePanel
           title="Create A User"
           subtitle="Please complete the following form"
@@ -69,6 +70,11 @@ class CreateUser extends Component {
     );
   }
 }
+const mapState = state => ({
+  store: {
+    app: state.app,
+  },
+});
 
 const mapDispatch = dispatch => ({
   actions: {
@@ -76,4 +82,4 @@ const mapDispatch = dispatch => ({
   },
 });
 
-export default connect(null, mapDispatch)(CreateUser);
+export default connect(mapState, mapDispatch)(CreateUser);

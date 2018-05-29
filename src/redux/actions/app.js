@@ -11,7 +11,7 @@ const {
   WRAPPER,
   ATTEMPT_LOGIN,
   SUCCESS_LOGIN,
-  // FAIL_LOGIN,
+  FAIL_LOGIN,
   RESET_LOGIN,
 } = CASES.APP;
 const { DOCTOR } = CASES;
@@ -21,29 +21,54 @@ export const initWrapperStyle = () => ({
   fromWrapper: true,
 });
 
-export const login = ({ email }) => dispatch => {
+export const login = ({ email, password }) => dispatch => {
   dispatch({
     type: ATTEMPT_LOGIN,
     loading: true,
     loaded: false,
     error: false,
     auth: false,
-    email: email || null,
+    email,
+    password,
   });
-  /// fetch sign in
-  setTimeout(() => {
-    return dispatch({
-      type: SUCCESS_LOGIN,
-      loading: false,
-      loaded: true,
-      error: false,
-      auth: true,
-      // for testing
-      username: 'tkirpaul',
-      firstName: 'Trevor',
-      lastName: 'Kirpaul',
+
+  // ? GraphQL Mutation - Fetch to SignIn
+  // const userEmail = email;
+  // const userPassword = password;
+  const query = `
+    {
+      signin(
+        email: "${email}"
+        password: "${password}"
+      ) {
+        id
+        firstName
+        lastName
+      }
+    }
+  `;
+
+  request('http://localhost:4000', query)
+    .then(({ signin }) => {
+      const User = signin[0];
+      return dispatch({
+        type: SUCCESS_LOGIN,
+        loading: false,
+        loaded: true,
+        error: false,
+        auth: true,
+        userId: User.id,
+      });
+    })
+    .catch(err => {
+      return dispatch({
+        type: FAIL_LOGIN,
+        loading: false,
+        error: false,
+        auth: false,
+        userId: null,
+      });
     });
-  }, 0);
 };
 
 export const createUser = user => dispatch => {

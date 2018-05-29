@@ -23,8 +23,15 @@ class SignIn extends Component {
     } = nextProps;
     const { loading } = prevState;
     if (loading && !app.loading) {
+      if (app.auth) {
+        return {
+          loadingComplete: true,
+          auth: true,
+        };
+      }
       return {
         loadingComplete: true,
+        auth: false,
       };
     }
     if (app.fromWrapper) {
@@ -43,6 +50,7 @@ class SignIn extends Component {
       loadingMessage: null,
       loadingComplete: false,
       title: 'Sign In',
+      auth: false,
     };
   }
   handleOnChange = e => {
@@ -60,7 +68,6 @@ class SignIn extends Component {
       email: this.state.email,
       password: this.state.password,
     });
-    localStorage.setItem('name', this.state.email);
   };
   handleCloseModal = () => {
     this.setState(() => ({
@@ -68,7 +75,7 @@ class SignIn extends Component {
       loadingComplete: false,
       loadingMessage: null,
     }));
-    this.props.history.push('/');
+    this.state.auth && this.props.history.push('/');
   };
   render() {
     const actions = [
@@ -79,11 +86,12 @@ class SignIn extends Component {
         onClick={this.handleCloseModal}
       />,
     ];
+
     const {
       store: { app },
     } = this.props;
     return (
-      <div style={{ paddingTop: app.fromWrapper ? '70px' : '0px' }}>
+      <div style={{ marginTop: app.fromWrapper ? '70px' : '0px' }}>
         <TitlePanel
           title={this.state.title}
           subtitle="Please complete the following form"
@@ -108,7 +116,7 @@ class SignIn extends Component {
           {this.state.loading && !this.state.loadingComplete ? (
             <CircularProgress />
           ) : (
-            <p>You are successfully signed in</p>
+            <p>{this.state.auth ? 'Success' : 'fail'}</p>
           )}
         </Dialog>
       </div>
