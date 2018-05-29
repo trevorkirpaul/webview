@@ -11,12 +11,14 @@ import COLORS from '../utils/constants';
 //   height: 100%;
 // `;
 
-const iconStyles = {};
+const iconStyles = {
+  fontSize: 65,
+};
 
-const Icon = ({ color, icon = 'home' }) => (
+const Icon = ({ color, icon = 'home', size }) => (
   <FontIcon
     className="material-icons"
-    style={iconStyles}
+    style={{ fontSize: size || 65 }}
     color={color || COLORS.white}
   >
     {icon}

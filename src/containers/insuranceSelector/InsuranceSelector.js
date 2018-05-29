@@ -8,10 +8,43 @@ import {
   CardTitle,
   CardText,
 } from 'material-ui/Card';
+import Icon from '../../reusable/Icon';
 import FlatButton from 'material-ui/FlatButton';
 import styled from 'styled-components';
 import CircularProgress from 'material-ui/CircularProgress';
 
+// ? INSURANCE OPTIONS
+const insOptions = [
+  { name: 'Gold', price: 350, icon: 'chevron_right', key: '001' },
+  { name: 'Silver', price: 350, icon: 'chevron_right', key: '002' },
+  { name: 'Bronze', price: 350, icon: 'chevron_right', key: '003' },
+];
+
+// ? INSURANCE STYLES / FOR CARDS
+const OptionsWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin-top: 100px;
+`;
+const InsuranceOptionWrap = styled.div`
+  background-color: #c5e1a5;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  color: #383838;
+  font-weight: 5600;
+  font-size: 16px;
+  align-items: center;
+`;
+const InsuranceOptionInner = styled.div``;
+const InsuranceOptionBoldText = styled.span`
+  font-weight: 600;
+`;
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
@@ -24,6 +57,20 @@ const Wrapper = styled.div`
 const CardWrapper = styled.div`
   margin: 10px;
 `;
+
+const MobileInsurancePanel = ({ name, price, icon }) => (
+  <InsuranceOptionWrap>
+    <InsuranceOptionInner>
+      <p>
+        name: <InsuranceOptionBoldText>{name}</InsuranceOptionBoldText>
+      </p>
+      <p>
+        price: <InsuranceOptionBoldText>${price}</InsuranceOptionBoldText>
+      </p>
+    </InsuranceOptionInner>
+    <Icon color="#383838" icon={icon} size={40} />
+  </InsuranceOptionWrap>
+);
 
 const InsurancePanel = ({
   name = 'test',
@@ -59,7 +106,21 @@ class InsuranceSelector extends Component {
   }
   render() {
     const { store } = this.props;
-
+    //  ! FROM WRAPPER
+    if (!store.app.fromWrapper) {
+      return (
+        <OptionsWrap>
+          {insOptions.map(opt => (
+            <MobileInsurancePanel
+              key={opt.key}
+              name={opt.name}
+              price={opt.price}
+              icon={opt.icon}
+            />
+          ))}
+        </OptionsWrap>
+      );
+    }
     return (
       <div>
         <TitlePanel title="Insurance Selector" />
