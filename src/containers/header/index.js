@@ -14,7 +14,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import COLORS from '../../utils/constants';
-import Icon from '../../reusable/Icon';
+// import Icon from '../../reusable/Icon';
 import { login } from '../../redux/actions/app';
 
 const NavWrapper = styled.div`
@@ -32,30 +32,30 @@ const NavWrapper = styled.div`
   top: 0;
 `;
 
-const MobileHeader = styled.div`
-  padding-top: 25px;
-  background-color: palevioletred;
-  color: #383838;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  width: 100vw;
-`;
-const MobileButtonWrap = styled.div`
-  width: 75%;
-  padding-bottom: 10px;
-  padding-right: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
-`;
-const MobileTitle = styled.span`
-  font-size: 2em;
-  font-family: 'Roboto', sans-serif;
-  color: #f8f8f8;
-`;
+// const MobileHeader = styled.div`
+//   padding-top: 25px;
+//   background-color: palevioletred;
+//   color: #383838;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   position: fixed;
+//   width: 100vw;
+// `;
+// const MobileButtonWrap = styled.div`
+//   width: 75%;
+//   padding-bottom: 10px;
+//   padding-right: 5px;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   align-content: center;
+// `;
+// const MobileTitle = styled.span`
+//   font-size: 2em;
+//   font-family: 'Roboto', sans-serif;
+//   color: #f8f8f8;
+// `;
 
 const TitleLogo = styled.span`
   text-decoration: none;
@@ -157,7 +157,7 @@ class Header extends Component {
       store: { app },
       actions,
     } = this.props;
-    const name = localStorage.getItem('name');
+    // const name = localStorage.getItem('name');
     if (app.auth) {
       actions.loadInsuranceData();
       actions.loadDoctorData();

@@ -91,6 +91,22 @@ export default (state = initState, action) => {
         ...state,
         fromWrapper: action.fromWrapper,
       };
+    case '@@failed_to_confirm':
+      return {
+        ...state,
+        loading: action.loading,
+        error: action.error,
+        loaded: action.loaded,
+        confirm: action.confirm
+      };
+      case '@@yes_confirm':
+      return {
+        ...state,
+        loading: action.loading,
+        error: action.error,
+        loaded: action.loaded,
+        confirm: action.confirm
+      }
     default:
       return state;
   }

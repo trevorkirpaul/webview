@@ -11,9 +11,9 @@ import COLORS from '../utils/constants';
 //   height: 100%;
 // `;
 
-const iconStyles = {
-  fontSize: 65,
-};
+// const iconStyles = {
+//   fontSize: 65,
+// };
 
 const Icon = ({ color, icon = 'home', size }) => (
   <FontIcon

@@ -1,4 +1,5 @@
 import CASES from '../cases';
+import axios from 'axios';
 // import { URI } from '../../config';
 import { request } from 'graphql-request';
 import INSURANCE_DATA from '../../API/insurancePackages.json';
@@ -94,57 +95,61 @@ export const createUser = user => dispatch => {
   //     }
   //   }
   // `;
-  const mutation = `
-    mutation CreateUser(
-      $email: String
-      $firstName: String
-      $lastName: String,
-      $city: String,
-      $state: String,
-      $country: String,
-      $zip: Int,
-      $phone: Int,
-      $dob: Int,
-      $password: String,
-    ) {
-      signup(
-        email: $email
-        firstName: $firstName
-        lastName: $lastName
-        city: $city
-        state: $state
-        country: $country
-        zip: $zip
-        phone: $phone
-        dob: $dob
-        password: $password
-      ) {
-        id
-      }
-    }
-  `;
+  // const mutation = `
+  //   mutation CreateUser(
+  //     $email: String
+  //     $password: String,
+  //   ) {
+  //     signup(
+  //       email: $email
+  //       password: $password
+  //     ) {
+  //       id
+  //     }
+  //   }
+  // `;
   // this is from the package "graphql-request"
   // axios like fetch library for GraphQL based fetches
-  request('http://localhost:4000', mutation, variables)
-    .then(({ signup: { id } }) => {
-      return dispatch({
-        type: ACCOUNT.CREATE_SUCCESS,
-        loading: false,
-        loaded: true,
-        error: false,
-        auth: true,
-        userId: id,
-      });
+
+  //  ! replaced with call to top level API
+  // request('http://localhost:4000', mutation, variables)
+  //   .then(({ signup: { id } }) => {
+  //     return dispatch({
+  //       type: ACCOUNT.CREATE_SUCCESS,
+  //       loading: false,
+  //       loaded: true,
+  //       error: false,
+  //       auth: true,
+  //       userId: id,
+  //     });
+  //   })
+  //   .catch(err =>
+      // dispatch({
+      //   type: ACCOUNT.CREATE_FAIL,
+      //   loading: false,
+      //   loaded: true,
+      //   error: true,
+      //   auth: false,
+      // })
+  //   );
+
+  // ! call to top level API
+  axios
+    .post('http://localhost:3002/user', variables)
+    .then(res => {
+      console.log(res)
     })
-    .catch(err =>
-      dispatch({
+    .catch(({ response }) => {
+      console.log('ERROR');
+      console.log(response.data.error.message);
+      return dispatch({
         type: ACCOUNT.CREATE_FAIL,
         loading: false,
         loaded: true,
         error: true,
         auth: false,
       })
-    );
+    });
 };
 
 export const resetApp = () => ({ type: RESET_LOGIN });
@@ -182,3 +187,30 @@ export const loadDoctorData = () => dispatch => {
     });
   }, 0);
 };
+
+
+export const handleConfirmUser = ({ Username, confirmCode }) => dispatch => {
+  console.log('CONFIRMING')
+  axios
+    .post('http://localhost:3002/confirm', ({ Username, confirmCode }))
+    .then(({ data }) => {
+      if (data.err) {
+        console.log('failed')
+        return dispatch({
+          type: '@@failed_to_confirm',
+          loading: false,
+          loaded: true,
+          error: true,
+          confirm: true
+        })
+      }
+      return dispatch({
+        type: '@@yes_confirm',
+        loading: false,
+        loaded: true,
+        error: false,
+        confirm: true
+      })
+    })
+    .catch(err => console.log({err}))
+}

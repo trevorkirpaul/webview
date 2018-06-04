@@ -10,6 +10,7 @@ import InsuranceSelector from '../containers/insuranceSelector/InsuranceSelector
 import FindDoctors from '../containers/findDoctors/FindDoctors';
 import DoctorSelector from '../containers/doctorSelector/DoctorSelector';
 import Dashboard from '../containers/dashboard/Dashboard';
+import Welcome from '../containers/welcome/Welcome';
 export default () => (
   <BrowserRouter>
     <div>
@@ -24,6 +25,7 @@ export default () => (
         <Route exact path="/find-doctors" component={FindDoctors} />
         <Route exact path="/doctor-selector" component={DoctorSelector} />
         <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/welcome" component={Welcome} />
       </Switch>
     </div>
   </BrowserRouter>
