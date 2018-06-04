@@ -1,7 +1,7 @@
 import CASES from '../cases';
 import axios from 'axios';
 // import { URI } from '../../config';
-import { request } from 'graphql-request';
+// import { request } from 'graphql-request';
 import INSURANCE_DATA from '../../API/insurancePackages.json';
 import DOCTOR_DATA from '../../API/doctors.json';
 
@@ -32,44 +32,68 @@ export const login = ({ email, password }) => dispatch => {
     email,
     password,
   });
-
-  // ? GraphQL Mutation - Fetch to SignIn
-  // const userEmail = email;
-  // const userPassword = password;
-  const query = `
-    {
-      signin(
-        email: "${email}"
-        password: "${password}"
-      ) {
-        id
-        firstName
-        lastName
+  // passWORD1987!
+  axios
+    .post('http://localhost:3002/auth', ({ username: email, password }))
+    .then(token => {
+      const { data } = token
+      if (data.error) {
+        return dispatch({
+          type: FAIL_LOGIN,
+          loading: true,
+          loaded: false,
+          error: false,
+          auth: false,
+        });
       }
-    }
-  `;
-
-  request('http://localhost:4000', query)
-    .then(({ signin }) => {
-      const User = signin[0];
       return dispatch({
         type: SUCCESS_LOGIN,
         loading: false,
         loaded: true,
         error: false,
         auth: true,
-        userId: User.id,
+        token: data.token
       });
     })
-    .catch(err => {
-      return dispatch({
-        type: FAIL_LOGIN,
-        loading: false,
-        error: false,
-        auth: false,
-        userId: null,
-      });
-    });
+    .catch(err => console.log('ERR', err))
+
+  // ? GraphQL Mutation - Fetch to SignIn
+  // const userEmail = email;
+  // const userPassword = password;
+  // const query = `
+  //   {
+  //     signin(
+  //       email: "${email}"
+  //       password: "${password}"
+  //     ) {
+  //       id
+  //       firstName
+  //       lastName
+  //     }
+  //   }
+  // `;
+
+  // request('http://localhost:4000', query)
+  //   .then(({ signin }) => {
+  //     const User = signin[0];
+      // return dispatch({
+      //   type: SUCCESS_LOGIN,
+      //   loading: false,
+      //   loaded: true,
+      //   error: false,
+      //   auth: true,
+      //   userId: User.id,
+      // });
+  //   })
+  //   .catch(err => {
+  //     return dispatch({
+  //       type: FAIL_LOGIN,
+  //       loading: false,
+  //       error: false,
+  //       auth: false,
+  //       userId: null,
+  //     });
+  //   });
 };
 
 export const createUser = user => dispatch => {

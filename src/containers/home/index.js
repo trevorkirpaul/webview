@@ -66,7 +66,7 @@ const navOptions = [
     name: 'find_in_page',
     title: 'Doctor',
     color: '#FFEB3B',
-    key: '003',
+    key: '004',
     uri: '/insurance-selector',
   },
 ];

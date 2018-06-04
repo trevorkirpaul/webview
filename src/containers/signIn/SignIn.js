@@ -91,7 +91,7 @@ class SignIn extends Component {
       store: { app },
     } = this.props;
     return (
-      <div style={{ marginTop: app.fromWrapper ? '70px' : '0px' }}>
+      <div style={{ marginTop: app.fromWrapper ? '70px' : '70px' }}>
         <TitlePanel
           title={this.state.title}
           subtitle="Please complete the following form"
