@@ -35,8 +35,22 @@ export const login = ({ email, password }) => dispatch => {
   // passWORD1987!
   axios
     .post('http://localhost:3002/auth', ({ username: email, password }))
-    .then(token => {
-      const { data } = token
+    .then(data => {
+      const { error, data: { UserAttributes } } = data
+      if (error) {
+        return console.log('error', error)
+      }
+      if (UserAttributes) {
+        const username = UserAttributes[3].Value;
+        return dispatch({
+          type: SUCCESS_LOGIN,
+          loading: false,
+          loaded: true,
+          error: false,
+          auth: true,
+          username,
+        });
+      }
       if (data.error) {
         return dispatch({
           type: FAIL_LOGIN,
@@ -46,14 +60,7 @@ export const login = ({ email, password }) => dispatch => {
           auth: false,
         });
       }
-      return dispatch({
-        type: SUCCESS_LOGIN,
-        loading: false,
-        loaded: true,
-        error: false,
-        auth: true,
-        token: data.token
-      });
+  
     })
     .catch(err => console.log('ERR', err))
 
@@ -237,4 +244,10 @@ export const handleConfirmUser = ({ Username, confirmCode }) => dispatch => {
       })
     })
     .catch(err => console.log({err}))
+}
+
+export const getUserAttributes = ({ Username }) => dispatch => {
+  console.log('getting user attr')
+  axios
+    .post('http://localhost:3002/user/get', ({ Username }))
 }

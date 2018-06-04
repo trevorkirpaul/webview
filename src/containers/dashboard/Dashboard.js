@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import {bindActionCreators } from 'react'
+// import { getUserAttributes } from '../../redux/actions/app'
 import TitlePanel from '../../reusable/TitlePanel';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
@@ -34,11 +36,11 @@ class Dashboard extends Component {
           email = 'test@test.com',
           firstName = 'test',
           // lastName = 'test',
-          token
+          username
         },
       },
     } = this.props;
-    if (!token) {
+    if (!username) {
       return (
         <Wrapper>
           <p>You muse be signed in to access this page</p>
@@ -48,7 +50,7 @@ class Dashboard extends Component {
     }
     return (
       <div>
-        <TitlePanel title="Dashboard" subtitle={`Welcome, ${firstName}`} />
+        <TitlePanel title="Dashboard" subtitle={`Welcome, ${username}`} />
         <ListWrapper>
           <List>
             {/* <ListItem>
@@ -62,7 +64,7 @@ class Dashboard extends Component {
             <Divider /> */}
 
             <ListItem>
-              <ListText>Email: {email}</ListText>
+              <ListText>Email: {username}</ListText>
             </ListItem>
             <Divider />
 

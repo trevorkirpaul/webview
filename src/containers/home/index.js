@@ -31,6 +31,14 @@ const MobileButtonNav = styled.div`
   border-radius: 5px;
 `;
 
+const AuthGreeting = styled.div`
+  background: #383838;
+  color: #f8f8f8;
+  padding: 10px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+`;
+
 const MNavButton = ({ name, color, title, uri }) => (
   <MobileButtonNav color={color}>
     <Link style={{ textDecoration: 'none', color: '#383838' }} to={uri}>
@@ -91,17 +99,26 @@ class Home extends Component {
     // ! remove flip for prod, value is flipped for testing
     if (!app.fromWrapper) {
       return (
-        <MobileWrapper fromWrapper={app.fromWrapper}>
-          {navOptions.map(opt => (
-            <MNavButton
-              key={opt.key}
-              name={opt.name}
-              color={opt.color}
-              title={opt.title}
-              uri={opt.uri}
-            />
-          ))}
-        </MobileWrapper>
+        <div>
+          {
+            app.username && (
+              <AuthGreeting>
+                <p>Welcome, {app.username}</p>
+              </AuthGreeting>
+            )
+          }
+          <MobileWrapper fromWrapper={app.fromWrapper}>
+            {navOptions.map(opt => (
+              <MNavButton
+                key={opt.key}
+                name={opt.name}
+                color={opt.color}
+                title={opt.title}
+                uri={opt.uri}
+              />
+            ))}
+          </MobileWrapper>
+        </div>
       );
     }
     return (

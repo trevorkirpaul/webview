@@ -8,7 +8,7 @@ const initState = {
   userId: null,
   fromWrapper: false,
   confirm: null,
-  token: null
+  username: null
 };
 
 const {
@@ -38,7 +38,7 @@ export default (state = initState, action) => {
         loaded: action.loaded,
         error: action.error,
         auth: action.auth,
-        token: action.token
+        username: action.username,
       };
     case ACCOUNT.CREATE_BEGIN:
       return {
@@ -68,7 +68,6 @@ export default (state = initState, action) => {
       };
     case FAIL_LOGIN:
       return {
-        ...state,
         loading: action.loading,
         loaded: action.loaded,
         error: action.error,
