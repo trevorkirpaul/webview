@@ -11,6 +11,7 @@ import FindDoctors from '../containers/findDoctors/FindDoctors';
 import DoctorSelector from '../containers/doctorSelector/DoctorSelector';
 import Dashboard from '../containers/dashboard/Dashboard';
 import Welcome from '../containers/welcome/Welcome';
+import Quiz from '../containers/quiz/Quiz'
 export default () => (
   <BrowserRouter>
     <div>
@@ -25,6 +26,7 @@ export default () => (
         <Route exact path="/find-doctors" component={FindDoctors} />
         <Route exact path="/doctor-selector" component={DoctorSelector} />
         <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/quiz" component={Quiz} />
         <Route exact path="/welcome" component={Welcome} />
       </Switch>
     </div>

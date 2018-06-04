@@ -8,7 +8,8 @@ const initState = {
   userId: null,
   fromWrapper: false,
   confirm: null,
-  username: null
+  username: null,
+  quiz: null
 };
 
 const {
@@ -100,13 +101,30 @@ export default (state = initState, action) => {
         loaded: action.loaded,
         confirm: action.confirm
       };
-      case '@@yes_confirm':
+    case '@@yes_confirm':
       return {
         ...state,
         loading: action.loading,
         error: action.error,
         loaded: action.loaded,
         confirm: action.confirm
+      };
+    case '@@quiz_startFetch':
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+        error: false,
+        quiz: null
+      };
+    case '@@quiz_completeFetch':
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: false,
+        quizTitle: action.quizTitle,
+        questions: action.questions,
       }
     default:
       return state;

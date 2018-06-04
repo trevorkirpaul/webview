@@ -32,11 +32,11 @@ class Dashboard extends Component {
     const {
       store: {
         app: {
-          // username = 'test',
-          email = 'test@test.com',
-          firstName = 'test',
+          username = 'test',
+          // email = 'test@test.com',
+          // firstName = 'test',
           // lastName = 'test',
-          username
+          // username
         },
       },
     } = this.props;

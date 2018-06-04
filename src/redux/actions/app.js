@@ -251,3 +251,17 @@ export const getUserAttributes = ({ Username }) => dispatch => {
   axios
     .post('http://localhost:3002/user/get', ({ Username }))
 }
+// const quizId = "cji0dk5kf000e097296718tng"
+export const fetchQuiz = ({ acctType }) => dispatch => {
+  axios
+    .post('http://localhost:3002/quiz/find/', ({ acctType: 'programmer' }))
+    .then(({ data }) => {
+      return dispatch({
+        type: '@@quiz_completeFetch',
+        quizTitle: data.quiz.name,
+        questions: data.quiz.questions[0],
+
+      })
+    })
+    .catch(err => console.log({ err }))
+}

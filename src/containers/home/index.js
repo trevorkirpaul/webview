@@ -57,11 +57,11 @@ const navOptions = [
     uri: '/dashboard',
   },
   {
-    name: 'local_hospital',
-    title: 'Insurance',
+    name: 'list',
+    title: 'Quiz',
     color: '#FF8A65',
     key: '002',
-    uri: '/insurance-selector',
+    uri: '/quiz',
   },
   {
     name: 'brightness_medium',
