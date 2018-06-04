@@ -9,9 +9,9 @@ import Icon from '../../reusable/Icon';
 const MobileWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: ${ props => props.fromWrapper ? 'center' : 'space-around'};
   align-items: center;
-  margin-top: 100px;
+  margin-top: ${props => props.fromWrapper ? '100px' : '30px'};
   width: 100%;
   height: 100%;
 `;
@@ -91,7 +91,7 @@ class Home extends Component {
     // ! remove flip for prod, value is flipped for testing
     if (!app.fromWrapper) {
       return (
-        <MobileWrapper>
+        <MobileWrapper fromWrapper={app.fromWrapper}>
           {navOptions.map(opt => (
             <MNavButton
               key={opt.key}
