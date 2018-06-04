@@ -25,9 +25,9 @@ const NavWrapper = styled.div`
   font-family: 'Roboto', sans-serif;
   background-color: ${COLORS.lightBlue};
   padding-top: ${props => (props.fromWrapper ? '2em' : '1em')};
-  position: fixed;
-  width: 90%;
-  margin: 10px;
+  position: ${props => (props.fromWrapper ? 'fixed' : 'relative')};
+  width: ${props => (props.fromWrapper ? '90%' : 'auto')};
+  margin: ${props => props.fromWrapper ? '10px' : 0};
   left: 0;
   top: 0;
 `;

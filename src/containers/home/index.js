@@ -46,7 +46,7 @@ const navOptions = [
     title: 'Dashboard',
     color: '#FFB74D',
     key: '001',
-    uri: '/insurance-selector',
+    uri: '/dashboard',
   },
   {
     name: 'local_hospital',

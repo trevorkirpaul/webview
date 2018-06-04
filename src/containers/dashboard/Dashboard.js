@@ -5,6 +5,12 @@ import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 import styled from 'styled-components';
 import COLORS from '../../utils/constants';
+import RaisedButton from 'material-ui/RaisedButton'
+
+const Wrapper = styled(Paper)`
+  text-align: center;
+  padding: 15px;
+`
 
 const ListWrapper = styled(Paper)`
   padding: 15px 0;
@@ -17,6 +23,9 @@ const ListText = styled.p`
 `;
 const ListItem = styled.li``;
 class Dashboard extends Component {
+  handleNavHome = () => {
+    this.props.history.push('/sign-in')
+  }
   render() {
     const {
       store: {
@@ -25,9 +34,18 @@ class Dashboard extends Component {
           email = 'test@test.com',
           firstName = 'test',
           // lastName = 'test',
+          token
         },
       },
     } = this.props;
+    if (!token) {
+      return (
+        <Wrapper>
+          <p>You muse be signed in to access this page</p>
+          <RaisedButton label="Sign In" onClick={this.handleNavHome} />
+        </Wrapper>
+      )
+    }
     return (
       <div>
         <TitlePanel title="Dashboard" subtitle={`Welcome, ${firstName}`} />
