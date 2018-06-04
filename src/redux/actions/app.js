@@ -253,6 +253,9 @@ export const getUserAttributes = ({ Username }) => dispatch => {
 }
 // const quizId = "cji0dk5kf000e097296718tng"
 export const fetchQuiz = ({ acctType }) => dispatch => {
+  dispatch({
+    type: '@@quiz_startFetch',
+  })
   axios
     .post('http://localhost:3002/quiz/find/', ({ acctType: 'programmer' }))
     .then(({ data }) => {
